@@ -44,7 +44,7 @@ namespace Amherst_AerialPhotoViewer_1._0
         private bool m_bUpdateFocusMap2 = true;
         private string strBaseYr = null;
         private string strTopYr = null;
-    
+        private bool maploaded = false;
         #region setup Font Smoothing for EXPORT
         [DllImport("user32.dll", SetLastError = true)]
         static extern bool SystemParametersInfo(uint uiAction, uint uiParam, ref int pvParam, uint fWinIni);
@@ -108,6 +108,7 @@ namespace Amherst_AerialPhotoViewer_1._0
             cboTopYear.Items.AddRange(availableYrs);
             cboBotYear.Items.Clear();
             cboBotYear.Items.AddRange(availableYrs);
+        
 
             string dataPath = ConfigurationManager.AppSettings["BaseDataPath"];
 
@@ -189,6 +190,8 @@ namespace Amherst_AerialPhotoViewer_1._0
 
         private void btnChangeY_Click(object sender, EventArgs e)
         {
+            maploaded = true;
+            System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
             if ((cboBotYear.Text != "") && (cboTopYear.Text != ""))
             {
                 label3.Text = cboTopYear.Text;
@@ -301,13 +304,15 @@ namespace Amherst_AerialPhotoViewer_1._0
                     m_MapControltop.ActiveView.FocusMap.MoveLayer(parcellayertemp, 0);
                     m_MapControlbase.ActiveView.FocusMap.MoveLayer(parcellayertemp, 0);
                 }
-                MessageBox.Show("Top aerophoto is taken on: " + cboTopYear.Text + ".\r\nBottom areophoto is taken on: " + cboBotYear.Text + ".");
+                //MessageBox.Show("Top aerophoto is taken on: " + cboTopYear.Text + ".\r\nBottom areophoto is taken on: " + cboBotYear.Text + ".");
             }
             else
             {
                 MessageBox.Show("Please select two years to compare");
+              
             }
             GeneratePageLayout();
+            System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
         private void btnSwitch_Click(object sender, EventArgs e)
@@ -381,6 +386,7 @@ namespace Amherst_AerialPhotoViewer_1._0
         
         private void btnZoomTo_Click(object sender, EventArgs e)
         {
+            System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
             lblWarning.Text = "";
             IQueryFilter pQF = new QueryFilterClass();
             var query = from Parcel parcel in arylistParcelAdd
@@ -455,6 +461,7 @@ namespace Amherst_AerialPhotoViewer_1._0
                 m_MapControl.ActiveView.Extent = pEnv;
                 m_MapControl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
             }
+            System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
        
         private void btnClear_Click(object sender, EventArgs e)
@@ -745,6 +752,7 @@ namespace Amherst_AerialPhotoViewer_1._0
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             //////m_MapControl.ActiveView.Activate(m_MapControl.hWnd);
             //////m_MapControl.ActiveView.Deactivate();
             if (this.tabControl1.SelectedIndex == 0)
@@ -1130,6 +1138,11 @@ namespace Amherst_AerialPhotoViewer_1._0
             }
         }
         #endregion local method
+
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            e.Cancel = !maploaded;
+        }
 
     }
 }
