@@ -15,6 +15,7 @@ namespace Amherst_AerialPhotoViewer_1._0
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           
             ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.Engine);
             Application.Run(new frmMain());
         }

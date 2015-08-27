@@ -33,7 +33,7 @@ namespace Amherst_AerialPhotoViewer_1._0
         private CommandsEnvironment m_CommandsEnvironment = new CommandsEnvironmentClass();
         private IMosaicLayer botPublicMosaicLayer = null;
         private IMosaicLayer topPublicMosaicLayer = null;
-        private string[] availableYrs = new string[] { "1980", "1984", "2002", "2005", "2008", "2011", "2014" };
+        private string[] availableYrs = new string[] { "1980", "1984","1999", "2002", "2005", "2008", "2011", "2014" };
         private string[] oldYears = new string[] { "1980", "1984" };
         private ArrayList arylistParcelAdd = new ArrayList();
         private List<string> distinctStNum = new List<string>();
@@ -722,7 +722,6 @@ namespace Amherst_AerialPhotoViewer_1._0
            */
             //string exportFolder = ConfigurationManager.AppSettings["MapSaveDir"];
             string exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-
 
             string sNameRoot;
             sNameRoot = "ExportActiveViewSampleOutput";
