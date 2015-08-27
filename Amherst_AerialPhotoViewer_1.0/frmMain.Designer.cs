@@ -267,9 +267,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 78);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Bot Layer";
+            this.label5.Text = "Bottom Layer";
             // 
             // label6
             // 
