@@ -1143,5 +1143,10 @@ namespace Amherst_AerialPhotoViewer_1._0
             e.Cancel = !maploaded;
         }
 
+        private void axToolbarControl1_OnMouseDown(object sender, IToolbarControlEvents_OnMouseDownEvent e)
+        {
+
+        }
+
     }
 }
